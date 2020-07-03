@@ -1,0 +1,11 @@
+.bundle
+.env*
+.git/*
+.idea/*
+vendor/bundle
+/public/uploads/*
+log/*
+.DS_Store
+*.swp
+*~
+tmp/*
