@@ -11,8 +11,8 @@ import (
 func Inline(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	var results []interface{}
 
-	for ix, asset := range container.GetBotAssets() {
-		id := inline.ID + ":" + string(ix) + ":" + asset.Hash
+	for _, asset := range container.GetBotAssets() {
+		id := inline.ID + ":" + asset.Hash
 		uri := container.BotMemeUrl(asset, inline.Query)
 
 		switch asset.Codec {
@@ -21,7 +21,6 @@ func Inline(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 		default:
 			results = append(results, jpeg(asset, id, uri))
 		}
-
 	}
 
 	cfg := tgbotapi.InlineConfig{

@@ -41,7 +41,7 @@
   },
   {
     "prefix": "lukashenko",
-    "path": "assets/lukashenko/005.jpg",
+    "path": "assets/lukashenko/006.jpg",
     "licence": null,
     "source": null,
     "width": 800,
@@ -86,5 +86,30 @@
     "source": null,
     "width": 800,
     "height": 500
+  },
+  {
+    "prefix": "putin",
+    "path": "assets/putin/003.jpg",
+    "licence": "Creative Commons Attribution 4.0 International",
+    "source": "kremlin.ru, https://commons.wikimedia.org/wiki/File:Vladimir_Putin_address_to_citizens_2020-03-25.jpg",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "prefix": "putin",
+    "path": "assets/putin/004.jpg",
+    "licence": "Creative Commons Attribution 4.0 International",
+    "source": "http://kremlin.ru/events/president/news/63054/photos/63614",
+    "width": 800,
+    "height": 500
+  },
+  {
+    "prefix": "putin",
+    "path": "assets/putin/005.jpg",
+    "licence": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/Category:Vladimir_Putin#/media/File:%D0%9F%D1%83%D1%82%D0%B8%D0%BD_%D0%B8_%D0%92%D0%BE%D0%BB%D0%BE%D0%B4%D0%B8%D0%BD.jpg",
+    "width": 800,
+    "height": 500
   }
 ]
+
