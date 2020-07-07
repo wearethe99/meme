@@ -25,6 +25,7 @@ func Meme(c *gin.Context) {
 
 func memeResponse(c *gin.Context, term string, image *source.Image) {
 	c.Status(200)
+
 	c.Writer.Header().Set("Content-type", image.ContentType)
 	c.Writer.Header().Set("Content-Disposition", `inline`)
 

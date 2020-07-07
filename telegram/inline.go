@@ -27,8 +27,8 @@ func Inline(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 
 	cfg := tgbotapi.InlineConfig{
 		InlineQueryID: inline.ID,
-		IsPersonal: true,
-		CacheTime: 0,
+		IsPersonal: false,
+		CacheTime: 300,
 		Results: results,
 	}
 
