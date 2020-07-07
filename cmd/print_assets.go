@@ -6,9 +6,9 @@ import (
 	"meme/container"
 )
 
-func PrintAssets(c *cli.Context) error {
-	for _, image := range container.Sources {
-		fmt.Println(image.Hash + "\t" + image.Name)
+func PrintAssets(_ *cli.Context) error {
+	for _, asset := range container.Assets {
+		fmt.Println(asset.Prefix + "\t" + asset.Path + "\t" + asset.Image.Hash)
 	}
 
 	return nil

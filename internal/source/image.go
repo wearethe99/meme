@@ -11,10 +11,10 @@ type Image struct {
 	ContentType string
 	Codec 		Codec
 	Hash 		string
-	Name 		string
+	Name 		string // todo remove
 	Memeable 	gomeme.Memeable
-	Width		int
-	Height		int
+	Width		int	// todo remove
+	Height		int // todo remove
 }
 
 func NewImageFromFile(pathname string) (*Image, error) {

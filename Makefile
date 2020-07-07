@@ -11,7 +11,7 @@ run\:server:
 	go run *.go server
 
 run\:bot:
-	go run *.go bot --token=${BOT_TOKEN}
+	go run *.go bot --token=${BOT_TOKEN} --prefix=${BOT_PREFIX} --text=${BOT_TEXT}
 
 docker\:push:
 	docker login ${REGISTRY_DOMAIN} --username ${REGISTRY_USERNAME} --password ${REGISTRY_PASSWORD}

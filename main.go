@@ -8,14 +8,16 @@ import (
 	"os"
 )
 
+type action func (c *cli.Context) error
+
 func main() {
 	app := &cli.App{
 		Flags: []cli.Flag {
 			&cli.StringFlag{
-				Name: internal.SourceDirFlag,
-				Value: "assets/lukashenko",
-				Usage: "specify a directory with source images",
-				EnvVars: []string{"SOURCE_DIR"},
+				Name: internal.AssetsJsonFlag,
+				Value: "assets.json",
+				Usage: "specify a path to the assets.json file",
+				EnvVars: []string{"ASSETS"},
 			},
 		},
 		Commands: []*cli.Command{
@@ -35,8 +37,21 @@ func main() {
 						Usage: "telegram bot token",
 						EnvVars: []string{"BOT_TOKEN"},
 					},
+					&cli.StringFlag{
+						Name: internal.BotPrefixFlag,
+						Usage: "prefix for source images to serve",
+						EnvVars: []string{"BOT_PREFIX"},
+					},
+					&cli.StringFlag{
+						Name: internal.BotTextFlag,
+						Usage: "start text",
+						EnvVars: []string{"BOT_TEXT"},
+					},
 				},
-				Before: cmd.LoadAssets,
+				Before: cli.BeforeFunc(chain([]action{
+					cmd.LoadAssets,
+					cmd.ReadBotFlags,
+				})),
 				Action: cmd.Bot,
 			},{
 				Name:    "print",
@@ -49,6 +64,19 @@ func main() {
 	}
 
 	if err := app.Run(os.Args); err != nil {
-		panic(errors.Wrap(err, "cant run CLI"))
+		panic(errors.Wrap(err, "cant run the CLI"))
+	}
+}
+
+// make a single function which wraps all function from a list
+func chain(list []action) action {
+	return func(c *cli.Context) error {
+		for _, action := range list {
+			if err := action(c); err != nil {
+				return err
+			}
+		}
+
+		return nil
 	}
 }

@@ -7,7 +7,7 @@ import (
 	"meme/ctrl"
 )
 
-func Server(c *cli.Context) error {
+func Server(_ *cli.Context) error {
 	api := gin.Default()
 	api.GET(ctrl.MemeRoute, ctrl.Meme)
 

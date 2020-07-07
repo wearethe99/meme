@@ -2,13 +2,13 @@ package cmd
 
 import (
 	"github.com/urfave/cli/v2"
-	"meme/internal"
+	"meme/container"
 	"meme/telegram"
 )
 
-func Bot(c *cli.Context) error {
+func Bot(_ *cli.Context) error {
 	cfg := telegram.ServerConfig{
-		Token: c.String(internal.BotTokenFlag),
+		Token: container.BotToken,
 		Debug: true,
 	}
 

@@ -1,37 +1,11 @@
 package container
 
-import (
-	"github.com/pkg/errors"
-	"io/ioutil"
-	"meme/internal/source"
-	"path/filepath"
-)
+import "meme/internal"
 
-var Sources []*source.Image
-var SourceIx = make(map[string]*source.Image)
+var Assets []*internal.Asset
+var AssetPrefixGroup = make(map[string][]*internal.Asset)
+var AssetHashIx = make(map[string]*internal.Asset)
 
-func LoadSources(dir string) error {
-	files, err := ioutil.ReadDir(dir)
-
-	if err != nil {
-		return errors.Wrap(err, "cant load source files")
-	}
-
-	for _, f := range files {
-		image, err := source.NewImageFromFile(filepath.Join(dir, f.Name()))
-
-		if err != nil {
-			return err
-		}
-
-		Sources = append(Sources, image)
-	}
-
-	return nil
-}
-
-func IndexSources() {
-	for _, image := range Sources {
-		SourceIx[image.Hash] = image
-	}
-}
+var BotPrefix string
+var BotToken string
+var BotText string

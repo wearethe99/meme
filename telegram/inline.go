@@ -4,23 +4,22 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api"
 	"log"
 	"meme/container"
+	"meme/internal"
 	"meme/internal/source"
-	"net/url"
 )
 
 func Inline(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	var results []interface{}
 
-	for ix, image := range container.Sources {
-		slug := image.Hash + "?term=" + url.PathEscape(inline.Query)
-		id := inline.ID + ":" + string(ix) + ":" + image.Hash
-		uri := "https://ivote.live/meme/" + slug
+	for ix, asset := range container.GetBotAssets() {
+		id := inline.ID + ":" + string(ix) + ":" + asset.Hash
+		uri := container.BotMemeUrl(asset, inline.Query)
 
-		switch image.Codec {
+		switch asset.Codec {
 		case source.GIF:
-			results = append(results, gif(image, id, uri))
+			results = append(results, gif(asset, id, uri))
 		default:
-			results = append(results, jpeg(image, id, uri))
+			results = append(results, jpeg(asset, id, uri))
 		}
 
 	}
@@ -37,21 +36,21 @@ func Inline(bot *tgbotapi.BotAPI, inline *tgbotapi.InlineQuery) {
 	}
 }
 
-func gif(image *source.Image, id string, url string) tgbotapi.InlineQueryResultGIF {
+func gif(asset *internal.Asset, id string, url string) tgbotapi.InlineQueryResultGIF {
 	img := tgbotapi.NewInlineQueryResultGIF(id, url)
 
 	img.ThumbURL = url
-	img.Width = image.Width
-	img.Height = image.Height
+	img.Width = asset.Width
+	img.Height = asset.Height
 
 	return img
 }
 
-func jpeg(image *source.Image, id string, url string) tgbotapi.InlineQueryResultPhoto {
+func jpeg(asset *internal.Asset, id string, url string) tgbotapi.InlineQueryResultPhoto {
 	img := tgbotapi.NewInlineQueryResultPhotoWithThumb(id, url, url)
 
-	img.Width = image.Width
-	img.Height = image.Height
+	img.Width = asset.Width
+	img.Height = asset.Height
 
 	return img
 }

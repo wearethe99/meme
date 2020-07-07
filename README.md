@@ -17,5 +17,5 @@ make run:server
 ```
 
 ```bash
-make run:bot 
+make run:bot
 ```
