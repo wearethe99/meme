@@ -11,5 +11,5 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/technoweenie/multipartstreamer v1.0.1 // indirect
 	github.com/urfave/cli/v2 v2.2.0
-	golang.org/x/image v0.0.0-20200618115811-c13761719519 // indirect
+	golang.org/x/image v0.5.0 // indirect
 )
